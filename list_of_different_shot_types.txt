@@ -1,0 +1,53 @@
+Dunk
+Hook Shot
+Jump Shot
+Lay-Up
+Tip Shot
+
+Alley Oop
+Bank Shot
+Fadeaway
+Finger Roll
+
+Alley Oop Dunk Shot
+Alley Oop Layup Shot
+Cutting Dunk Shot
+Cutting Finger Roll Layup
+Cutting Layup Shot
+Driving Bank Hook Shot
+Driving Dunk Shot
+Driving Finger Roll Layup Shot
+Driving Floating Bank Jump Shot
+Driving Floating Jump Shot
+Driving Hook Shot
+Driving Layup Shot
+Driving Reverse Layup Shot
+Dunk Shot
+Fadeaway Jump Shot
+Finger Roll Layup Shot
+Floating Jump shot
+Hook Bank Shot
+Jump Bank Shot
+Jump Shot
+Layup Shot
+Pullup Jump Shot
+Putback Dunk Shot
+Putback Layup Shot
+Reverse Layup Shot
+Running Alley Oop Dunk Shot
+Running Alley Oop Layup Shot
+Running Dunk Shot
+Running Finger Roll Layup Shot
+Running Jump Shot
+Running Layup Shot
+Running Pull-Up Jump Shot
+Running Reverse Layup Shot
+Step Back Bank Jump Shot
+Step Back Jump Shot
+Tip Dunk Shot
+Tip Layup Shot
+Turnaround Bank Hook Shot
+Turnaround Fadeaway Bank Jump Shot
+Turnaround Fadeaway shot
+Turnaround Hook Shot
+Turnaround Jump Shot

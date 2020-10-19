@@ -1,0 +1,37 @@
+POINTS PER GAME
+rebounds per game
+assists per game
+blocks per game
+steals per game
+field goal %
+three pointers made
+three point %
+fantasy points per game
+true shooting %
+usage %
+offensive rebound %
+fast break points per game
+2nd chance points per game
+points in the paint per game
+top games list
+
+total points
+total rebounds
+total assists
+total blocks
+total steals
+total 3 pointers made
+active triple double leaders
+all-time triple double leaders
+most triple doubles in a season
+most 3pm in a game
+highest scoring game
+highest % of pts 3pts (team)
+most rebounds in a game
+most assists in a game
+most assists in a game (team)
+most points in a game (team)
+most steals in a game
+most blocks in a game
+most 3pt in a game
+catch and shoot field goal attempts

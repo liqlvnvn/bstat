@@ -194,10 +194,10 @@ def open_players_database():
         c = conn.cursor()
     
         # Create table
-        #"""
+        """
         c.execute('''
                 CREATE TABLE players (
-                id integer,
+                #id integer,
                 number integer,
                 first_name_ru text,
                 last_name_ru text,
@@ -212,12 +212,12 @@ def open_players_database():
                 birthday_year integer
                 )
                 ''')
-        #"""
+        """
 
         # Insert into table
-        c.execute("INSERT INTO players(id, number, first_name_ru, last_name_ru, mid_name_ru, first_name_en, last_name_en, mid_name_en, height, weight, birthday_day, birthday_month, birthday_year) VALUES (:id, :number, :first_name_ru, :last_name_ru, :mid_name_ru, :first_name_en, :last_name_en, :mid_name_en, :height, :weight, :birthday_day, :birthday_month, :birthday_year)",
+        c.execute("INSERT INTO players(number, first_name_ru, last_name_ru, mid_name_ru, first_name_en, last_name_en, mid_name_en, height, weight, birthday_day, birthday_month, birthday_year) VALUES (:number, :first_name_ru, :last_name_ru, :mid_name_ru, :first_name_en, :last_name_en, :mid_name_en, :height, :weight, :birthday_day, :birthday_month, :birthday_year)",
                 {
-                    'id': player_id_input.get(),
+                    #'id': player_id_input.get(),
                     'number': player_number_input.get(),
                     'first_name_ru': player_ru_surname_input.get(),
                     'last_name_ru': player_ru_name_input.get(),
@@ -240,7 +240,7 @@ def open_players_database():
 
 
         # Clear The Text Boxes
-        player_id_input.delete(0, END)
+        #player_id_input.delete(0, END)
         player_number_input.delete(0, END)
         player_ru_surname_input.delete(0, END)
         player_ru_name_input.delete(0, END)
@@ -264,10 +264,10 @@ def open_players_database():
 
     player_info_frame = LabelFrame(players_database_window, text="Player")
     player_info_frame.grid(row=10, column=0)
-    player_id_label = Label(player_info_frame, text="ID")
-    player_id_label.grid(row=0, column=0)
-    player_id_input = Entry(player_info_frame)
-    player_id_input.grid(row=0, column=1)
+    #player_id_label = Label(player_info_frame, text="ID")
+    #player_id_label.grid(row=0, column=0)
+    #player_id_input = Entry(player_info_frame)
+    #player_id_input.grid(row=0, column=1)
     player_number_label = Label(player_info_frame, text="Playing #")
     player_number_label.grid(row=1, column=0)
     player_number_input = Entry(player_info_frame)
@@ -312,11 +312,11 @@ def open_players_database():
     player_month_of_birthday_label.grid(row=99, column=2)
     player_year_of_birthday_label = Label(player_info_frame, text="Year")
     player_year_of_birthday_label.grid(row=99, column=3)
-    player_day_of_birthday_input = Entry(player_info_frame)
+    player_day_of_birthday_input = Entry(player_info_frame, width=3)
     player_day_of_birthday_input.grid(row=100, column=1)
-    player_month_of_birthday_input = Entry(player_info_frame)
+    player_month_of_birthday_input = Entry(player_info_frame, width=3)
     player_month_of_birthday_input.grid(row=100, column=2)
-    player_year_of_birthday_input = Entry(player_info_frame)
+    player_year_of_birthday_input = Entry(player_info_frame, width=3)
     player_year_of_birthday_input.grid(row=100, column=3)
     add_player_info = Button(player_info_frame, text="Add", command=add_player)
     add_player_info.grid(row=200, column=0)
@@ -325,6 +325,135 @@ def open_players_database():
 
 
 
+def edit_player(record):
+    def add_player():
+        conn = sqlite3.connect("player_database.db")
+
+        # Create cursor
+        c = conn.cursor()
+    
+        # Create table
+        """
+        c.execute('''
+                CREATE TABLE players (
+                #id integer,
+                number integer,
+                first_name_ru text,
+                last_name_ru text,
+                mid_name_ru text,
+                first_name_en text,
+                last_name_en text,
+                mid_name_en text,
+                height integer,
+                weight integer,
+                birthday_day integer,
+                birthday_month integer,
+                birthday_year integer
+                )
+                ''')
+        """
+
+        # Insert into table
+        c.execute("INSERT INTO players(number, first_name_ru, last_name_ru, mid_name_ru, first_name_en, last_name_en, mid_name_en, height, weight, birthday_day, birthday_month, birthday_year) VALUES (:number, :first_name_ru, :last_name_ru, :mid_name_ru, :first_name_en, :last_name_en, :mid_name_en, :height, :weight, :birthday_day, :birthday_month, :birthday_year)",
+                {
+                    #'id': player_id_input.get(),
+                    'number': player_number_input.get(),
+                    'first_name_ru': player_ru_surname_input.get(),
+                    'last_name_ru': player_ru_name_input.get(),
+                    'mid_name_ru': player_ru_patronymic_input.get(),
+                    'first_name_en': player_en_surname_input.get(),
+                    'last_name_en': player_en_name_input.get(),
+                    'mid_name_en': player_en_patronymic_input.get(),
+                    'height': player_height_input.get(),
+                    'weight': player_weight_input.get(),
+                    'birthday_day': player_day_of_birthday_input.get(),
+                    'birthday_month': player_month_of_birthday_input.get(),
+                    'birthday_year': player_year_of_birthday_input.get()
+                })
+
+        # Commit changes
+        conn.commit()
+
+        # Close sqlite connection
+        conn.close()
+
+    edit_player_window = Toplevel()
+    edit_player_window.title("Edit Player")
+
+    ok_button = Button(edit_player_window, text="Ok", command=edit_player_window.destroy)
+    ok_button.grid(row=0, column=0)
+    
+    test_label = Label(edit_player_window, text=str(record)).grid(row=2, column=0)
+    player_info_frame = LabelFrame(edit_player_window, text="Player")
+    player_info_frame.grid(row=10, column=0)
+    #player_id_label = Label(player_info_frame, text="ID")
+    #player_id_label.grid(row=0, column=0)
+    #player_id_input = Entry(player_info_frame)
+    #player_id_input.grid(row=0, column=1)
+    player_number_label = Label(player_info_frame, text="Playing #")
+    player_number_label.grid(row=1, column=0)
+    player_number_input = Entry(player_info_frame)
+    player_number_input.insert(0, record[1])
+    player_number_input.grid(row=1, column=1)
+    player_ru_surname_label = Label(player_info_frame, text="Surname, ru")
+    player_ru_surname_label.grid(row=2, column=0)
+    player_ru_surname_input = Entry(player_info_frame)
+    player_ru_surname_input.insert(0, record[2])
+    player_ru_surname_input.grid(row=2, column=1)
+    player_ru_name_label = Label(player_info_frame, text="Name, ru")
+    player_ru_name_label.grid(row=3, column=0)
+    player_ru_name_input = Entry(player_info_frame)
+    player_ru_name_input.insert(0, record[3])
+    player_ru_name_input.grid(row=3, column=1)
+    player_ru_patronymic_label = Label(player_info_frame, text="Patronymic, ru")
+    player_ru_patronymic_label.grid(row=4, column=0)
+    player_ru_patronymic_input = Entry(player_info_frame)
+    player_ru_patronymic_input.insert(0, record[4])
+    player_ru_patronymic_input.grid(row=4, column=1)
+    player_en_surname_label = Label(player_info_frame, text="Surname")
+    player_en_surname_label.grid(row=5, column=0)
+    player_en_surname_input = Entry(player_info_frame)
+    player_en_surname_input.insert(0, record[5])
+    player_en_surname_input.grid(row=5, column=1)
+    player_en_name_label = Label(player_info_frame, text="Name")
+    player_en_name_label.grid(row=6, column=0)
+    player_en_name_input = Entry(player_info_frame)
+    player_en_name_input.insert(0, record[6])
+    player_en_name_input.grid(row=6, column=1)
+    player_en_patronymic_label = Label(player_info_frame, text="Patronymic")
+    player_en_patronymic_label.grid(row=7, column=0)
+    player_en_patronymic_input = Entry(player_info_frame)
+    player_en_patronymic_input.insert(0, record[7])
+    player_en_patronymic_input.grid(row=7, column=1)
+    player_height_label = Label(player_info_frame, text="Height")
+    player_height_label.grid(row=8, column=0)
+    player_height_input = Entry(player_info_frame)
+    player_height_input.insert(0, record[8])
+    player_height_input.grid(row=8, column=1)
+    player_weight_label = Label(player_info_frame, text="Weight")
+    player_weight_label.grid(row=9, column=0)
+    player_weight_input = Entry(player_info_frame)
+    player_weight_input.insert(0, record[9])
+    player_weight_input.grid(row=9, column=1)
+    player_birthday_label = Label(player_info_frame, text="Birthday")
+    player_birthday_label.grid(row=99, column=0)
+    player_day_of_birthday_label = Label(player_info_frame, text="Day")
+    player_day_of_birthday_label.grid(row=99, column=1)
+    player_month_of_birthday_label = Label(player_info_frame, text="Month")
+    player_month_of_birthday_label.grid(row=99, column=2)
+    player_year_of_birthday_label = Label(player_info_frame, text="Year")
+    player_year_of_birthday_label.grid(row=99, column=3)
+    player_day_of_birthday_input = Entry(player_info_frame, width=3)
+    player_day_of_birthday_input.insert(0, record[10])
+    player_day_of_birthday_input.grid(row=100, column=1)
+    player_month_of_birthday_input = Entry(player_info_frame, width=3)
+    player_month_of_birthday_input.insert(0, record[11])
+    player_month_of_birthday_input.grid(row=100, column=2)
+    player_year_of_birthday_input = Entry(player_info_frame, width=3)
+    player_year_of_birthday_input.insert(0, record[12])
+    player_year_of_birthday_input.grid(row=100, column=3)
+    save_player_info = Button(edit_player_window, text="Save", command=add_player)
+    save_player_info.grid(row=200, column=0)
 
 
 def submit_player():
@@ -332,15 +461,33 @@ def submit_player():
 
 
 def open_list_of_players():
+    def edit_player_info():
+        pass
+
     list_of_players_window = Toplevel()
     list_of_players_window.title("List of Players")
 
     ok_button = Button(list_of_players_window, text="Ok", command=list_of_players_window.destroy)
-    ok_button.grid(row=0, column=0)
-    player1_button = Button(list_of_players_window, text="Player1")
-    player1_button.grid(row=1, column=0)
-    player2_button = Button(list_of_players_window, text="Player2")
-    player2_button.grid(row=2, column=0)
+    ok_button.pack()
+
+    conn = sqlite3.connect('player_database.db')
+    c = conn.cursor()
+
+    c.execute("SELECT *, oid FROM players")
+
+    records = c.fetchall()
+    for i, record in enumerate(records):
+        name_label = record[2] + ' ' + record[3]
+        Button(list_of_players_window, text=name_label, command=lambda:edit_player(records[i])).pack()
+
+    #Label(list_of_players_window, text=str(records)).pack()
+    #player1_button = Button(list_of_players_window, text="Player1")
+    #player1_button.grid(row=1, column=0)
+    #player2_button = Button(list_of_players_window, text="Player2")
+    #player2_button.grid(row=2, column=0)
+
+    conn.commit()
+    conn.close()
 
 myLabel = Label(root, text=time.strftime('%H:%M:%S'))
 myLabel.grid(row=0, column=0)

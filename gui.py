@@ -476,9 +476,12 @@ def open_list_of_players():
     c.execute("SELECT *, oid FROM players")
 
     records = c.fetchall()
+    print(records)
     for i, record in enumerate(records):
         name_label = record[2] + ' ' + record[3]
         Button(list_of_players_window, text=name_label, command=lambda:edit_player(records[i])).pack()
+        print(i)
+        print(record[i])
 
     #Label(list_of_players_window, text=str(records)).pack()
     #player1_button = Button(list_of_players_window, text="Player1")

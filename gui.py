@@ -186,7 +186,7 @@ def open_game_details():
     #duration_of_the_period = 
 
 
-def open_players_database():
+def open_add_player():
     def add_player():
         conn = sqlite3.connect("player_database.db")
 
@@ -195,24 +195,7 @@ def open_players_database():
     
         # Create table
         """
-        c.execute('''
-                CREATE TABLE players (
-                #id integer,
-                number integer,
-                first_name_ru text,
-                last_name_ru text,
-                mid_name_ru text,
-                first_name_en text,
-                last_name_en text,
-                mid_name_en text,
-                height integer,
-                weight integer,
-                birthday_day integer,
-                birthday_month integer,
-                birthday_year integer
-                )
-                ''')
-        """
+       """
 
         # Insert into table
         c.execute("INSERT INTO players(number, first_name_ru, last_name_ru, mid_name_ru, first_name_en, last_name_en, mid_name_en, height, weight, birthday_day, birthday_month, birthday_year) VALUES (:number, :first_name_ru, :last_name_ru, :mid_name_ru, :first_name_en, :last_name_en, :mid_name_en, :height, :weight, :birthday_day, :birthday_month, :birthday_year)",
@@ -232,11 +215,21 @@ def open_players_database():
                     'birthday_year': player_year_of_birthday_input.get()
                 })
 
+        c.execute("SELECT *, oid FROM players")
+
+        records = c.fetchall()
+        print(records)
+        for i, record in enumerate(records):
+            name_label = record[2] + ' ' + record[3]
+            Button(list_of_players_window, text=name_label, command=lambda:edit_player(records[i])).pack()
+            print(i)
+            print(record[i])
         # Commit changes
         conn.commit()
 
         # Close sqlite connection
         conn.close()
+
 
 
         # Clear The Text Boxes
@@ -259,7 +252,7 @@ def open_players_database():
 
     ok_button = Button(players_database_window, text="Ok", command=players_database_window.destroy)
     ok_button.grid(row=0, column=0)
-    view_list_of_players_button = Button(players_database_window, text="View List of Players", command=open_list_of_players)
+    view_list_of_players_button = Button(players_database_window, text="View List of Players", command=open_add_player)
     view_list_of_players_button.grid(row=1, column=0)
 
     player_info_frame = LabelFrame(players_database_window, text="Player")
@@ -331,7 +324,7 @@ def edit_player(record):
 
         # Create cursor
         c = conn.cursor()
-    
+
         # Create table
         """
         c.execute('''
@@ -382,7 +375,7 @@ def edit_player(record):
 
     ok_button = Button(edit_player_window, text="Ok", command=edit_player_window.destroy)
     ok_button.grid(row=0, column=0)
-    
+
     test_label = Label(edit_player_window, text=str(record)).grid(row=2, column=0)
     player_info_frame = LabelFrame(edit_player_window, text="Player")
     player_info_frame.grid(row=10, column=0)
@@ -460,7 +453,7 @@ def submit_player():
     pass
 
 
-def open_list_of_players():
+def open_players_database():
     def edit_player_info():
         pass
 
@@ -469,6 +462,8 @@ def open_list_of_players():
 
     ok_button = Button(list_of_players_window, text="Ok", command=list_of_players_window.destroy)
     ok_button.pack()
+    add_player_button = Button(list_of_players_window, text="+", command=open_add_player)
+    add_player_button.pack()
 
     conn = sqlite3.connect('player_database.db')
     c = conn.cursor()

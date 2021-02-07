@@ -15,27 +15,33 @@ root.title("Basketball Statistics")
 
 class MainWindow():
     def __init__(self, master):
-        myLabel = Label(root, text=time.strftime('%H:%M:%S'))
-        myLabel.grid(row=0, column=0)
+        menu_frame = LabelFrame(root)
+        menu_frame.grid(row=0, column=0)
 
-        game_details_button = Button(text="Game Details", command=self.open_game_details)
+        new_game_button = Button(menu_frame, text="New Game")
+        new_game_button.grid(row=0, column=0)
+        game_details_button = Button(menu_frame, text="Game Details", command=self.open_game_details)
         game_details_button.grid(row=0, column=1)
 
-        players_database_button = Button(text="Players database", command=self.open_players_database)
+        players_database_button = Button(menu_frame, text="Players database", command=self.open_players_database)
         players_database_button.grid(row=0, column=2)
 
-        close_button = Button(text="Close", command=root.destroy)
+        close_button = Button(menu_frame, text="Close", command=root.destroy)
         close_button.grid(row=0, column=3)
 
-        shot_button = Button(text="Shot")
+        game_actions_frame = LabelFrame(root)
+        game_actions_frame.grid(row=1, column=0)
+        myLabel = Label(game_actions_frame, text=time.strftime('%H:%M:%S'))
+        myLabel.grid(row=0, column=0)
+        shot_button = Button(game_actions_frame, text="Shot")
         shot_button.grid(row=1, column=0)
         #made_bucket_button = Button(text="Made Bucket")
         #made_bucket_button.grid(row=1, column=0)
 
-        rebound_button = Button(text="Rebound")
+        rebound_button = Button(game_actions_frame, text="Rebound")
         rebound_button.grid(row=2, column=0)
 
-        made_turnover_button = Button(text="Turnover")
+        made_turnover_button = Button(game_actions_frame, text="Turnover")
         made_turnover_button.grid(row=3, column=0)
 
         #blockshot_button = Button(text="Block")
@@ -45,7 +51,7 @@ class MainWindow():
         #steal_button.grid(row=5, column=0)
         #grid(row=0, column=0)
 
-        foul_button = Button(text="Foul")
+        foul_button = Button(game_actions_frame, text="Foul")
         foul_button.grid(row=6, column=0)
 
 

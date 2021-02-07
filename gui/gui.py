@@ -7,6 +7,7 @@ import sqlite3
 # Project's imports
 import game_settings
 import player_database
+import game_settings
 
 
 root = Tk()
@@ -102,7 +103,8 @@ class MainWindow():
 
 
     def open_game_details(self):
-        game_settings.open_game_details()
+        # game_settings.open_game_details()
+        w = game_settings.GameSettingsWindow()
 
     def open_players_database(self):
         e = player_database.PlayerDatabase()

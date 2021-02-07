@@ -1,6 +1,8 @@
 from tkinter import *
 import sqlite3
 
+import player_database
+
 class AddEditPlayerWindow():
     def __init__(self, list_of_players_window, player_id=None):
         self.player_id = player_id
@@ -108,7 +110,7 @@ class AddEditPlayerWindow():
         # Close sqlite connection
         conn.close()
 
-        self.list_of_players_window.update_list_of_players()
+        # self.list_of_players_window.update_list_of_players()
         self.clear_fields()
 
     def clear_fields(self):
@@ -170,6 +172,7 @@ class AddEditPlayerWindow():
         # Close sqlite connection
         conn.close()
         self.players_database_window.destroy()
+        e = player_database.PlayerDatabase()
 
     def delete_player(self):
         conn = sqlite3.connect("player_database.db")
@@ -184,5 +187,6 @@ class AddEditPlayerWindow():
 
         # Close sqlite connection
         conn.close()
-        self.list_of_players_window.update_list_of_players()
+        # self.list_of_players_window.update_list_of_players()
         self.players_database_window.destroy()
+        e = player_database.PlayerDatabase()

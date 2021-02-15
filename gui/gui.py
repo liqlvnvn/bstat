@@ -8,6 +8,8 @@ import sqlite3
 import game_settings
 import player_database
 import game_settings
+import select_player
+import player
 
 
 root = Tk()
@@ -18,7 +20,7 @@ class MainWindow():
         menu_frame = LabelFrame(root)
         menu_frame.grid(row=0, column=0)
 
-        new_game_button = Button(menu_frame, text="New Game")
+        new_game_button = Button(menu_frame, text="New Game", command=self.new_game)
         new_game_button.grid(row=0, column=0)
         game_details_button = Button(menu_frame, text="Game Details", command=self.open_game_details)
         game_details_button.grid(row=0, column=1)
@@ -58,41 +60,51 @@ class MainWindow():
         rosters_frame = LabelFrame(root, text="Rosters", padx=5, pady=5)
         rosters_frame.grid(row=100, column=0)
 
-        team1_frame = LabelFrame(rosters_frame, text="Team1 roster", padx=5, pady=5)
-        team1_frame.grid(row=0, column=0)
-        team1_add_player_button = Button(team1_frame, text="+")
+        self.team1_frame = LabelFrame(rosters_frame, text="Team1 roster", padx=5, pady=5)
+        self.team1_frame.grid(row=0, column=0)
+        self.team1_frame_roster = LabelFrame(self.team1_frame, text="Roster")
+        team1_add_player_button = Button(self.team1_frame, text="+",
+                command=lambda x = self.team1_frame_roster:
+                            self.add_player2roster(x))
         team1_add_player_button.pack()
-        team1_player1_checkbox = Checkbutton(team1_frame, text="Player1")
-        team1_player2_checkbox = Checkbutton(team1_frame, text="Player2")
-        team1_player3_checkbox = Checkbutton(team1_frame, text="Player3")
-        team1_player4_checkbox = Checkbutton(team1_frame, text="Player4")
+        self.team1_frame_roster.pack()
+        team1_player1_checkbox = Checkbutton(self.team1_frame_roster, text="Player1")
+        team1_player2_checkbox = Checkbutton(self.team1_frame_roster, text="Player2")
+        team1_player3_checkbox = Checkbutton(self.team1_frame_roster, text="Player3")
+        team1_player4_checkbox = Checkbutton(self.team1_frame_roster, text="Player4")
         team1_player1_checkbox.pack()
         team1_player2_checkbox.pack()
         team1_player3_checkbox.pack()
         team1_player4_checkbox.pack()
 
-        team2_frame = LabelFrame(rosters_frame, text="Team2 roster", padx=5, pady=5)
-        team2_frame.grid(row=0, column=100)
-        team2_add_player_button = Button(team2_frame, text="+")
+        self.team2_frame = LabelFrame(rosters_frame, text="Team2 roster", padx=5, pady=5)
+        self.team2_frame.grid(row=0, column=100)
+        team2_add_player_button = Button(self.team2_frame, text="+")
         team2_add_player_button.pack()
-        team2_player1_checkbox = Checkbutton(team2_frame, text="Player5")
-        team2_player2_checkbox = Checkbutton(team2_frame, text="Player6")
-        team2_player3_checkbox = Checkbutton(team2_frame, text="Player7")
-        team2_player4_checkbox = Checkbutton(team2_frame, text="Player8")
+        self.team2_frame_roster = LabelFrame(self.team2_frame, text="Roster")
+        self.team2_frame_roster.pack()
+        team2_player1_checkbox = Checkbutton(self.team2_frame_roster, text="Player5")
+        team2_player2_checkbox = Checkbutton(self.team2_frame_roster, text="Player6")
+        team2_player3_checkbox = Checkbutton(self.team2_frame_roster, text="Player7")
+        team2_player4_checkbox = Checkbutton(self.team2_frame_roster, text="Player8")
         team2_player1_checkbox.pack()
         team2_player2_checkbox.pack()
         team2_player3_checkbox.pack()
         team2_player4_checkbox.pack()
 
-        playing_roster_frame = LabelFrame(rosters_frame, text="Playing rosters", padx=5, pady=5)
-        playing_roster_frame.grid(row=0, column=2)
+        self.playing_roster_frame = LabelFrame(rosters_frame, text="Playing rosters", padx=5, pady=5)
+        self.playing_roster_frame.grid(row=0, column=2)
         r = IntVar()
-        test_team11_radiobutton = Radiobutton(playing_roster_frame, text="Player1", variable=r, value = 1)
-        test_team12_radiobutton = Radiobutton(playing_roster_frame, text="Player2", variable=r, value = 2)
-        test_team13_radiobutton = Radiobutton(playing_roster_frame, text="Player3", variable=r, value = 2)
-        test_team21_radiobutton = Radiobutton(playing_roster_frame, text="Player4", variable=r, value = 2)
-        test_team22_radiobutton = Radiobutton(playing_roster_frame, text="Player5", variable=r, value = 2)
-        test_team23_radiobutton = Radiobutton(playing_roster_frame, text="Player6", variable=r, value = 2)
+        self.playing_roster_team1_frame = LabelFrame(self.playing_roster_frame, text="Team1")
+        self.playing_roster_team1_frame.grid(row=0, column=0)
+        self.playing_roster_team2_frame = LabelFrame(self.playing_roster_frame, text="Team2")
+        self.playing_roster_team2_frame.grid(row=0, column=1)
+        test_team11_radiobutton = Radiobutton(self.playing_roster_frame, text="Player1", variable=r, value = 1)
+        test_team12_radiobutton = Radiobutton(self.playing_roster_frame, text="Player2", variable=r, value = 2)
+        test_team13_radiobutton = Radiobutton(self.playing_roster_frame, text="Player3", variable=r, value = 2)
+        test_team21_radiobutton = Radiobutton(self.playing_roster_frame, text="Player4", variable=r, value = 2)
+        test_team22_radiobutton = Radiobutton(self.playing_roster_frame, text="Player5", variable=r, value = 2)
+        test_team23_radiobutton = Radiobutton(self.playing_roster_frame, text="Player6", variable=r, value = 2)
         test_team11_radiobutton.grid(row=0, column=0)
         test_team12_radiobutton.grid(row=1, column=0)
         test_team13_radiobutton.grid(row=2, column=0)
@@ -107,6 +119,12 @@ class MainWindow():
         test_event1_button.pack()
         test_event2_button.pack()
 
+    def new_game(self):
+        for widget in self.team1_frame_roster.winfo_children():
+            widget.destroy()
+
+        for widget in self.team2_frame_roster.winfo_children():
+            widget.destroy()
 
     def open_game_details(self):
         # game_settings.open_game_details()
@@ -114,6 +132,12 @@ class MainWindow():
 
     def open_players_database(self):
         e = player_database.PlayerDatabase()
+
+    def add_player2roster(self, frame):
+        # open window with list of players
+        s = select_player.PlayerSelection()
+        p = s.player.name()
+        Checkbutton(frame, text=p).pack()
 
 
 main_window = MainWindow(root)

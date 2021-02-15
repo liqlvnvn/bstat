@@ -79,9 +79,11 @@ class MainWindow():
 
         self.team2_frame = LabelFrame(rosters_frame, text="Team2 roster", padx=5, pady=5)
         self.team2_frame.grid(row=0, column=100)
-        team2_add_player_button = Button(self.team2_frame, text="+")
-        team2_add_player_button.pack()
         self.team2_frame_roster = LabelFrame(self.team2_frame, text="Roster")
+        team2_add_player_button = Button(self.team2_frame, text="+",
+                command=lambda x = self.team2_frame_roster:
+                            self.add_player2roster(x))
+        team2_add_player_button.pack()
         self.team2_frame_roster.pack()
         team2_player1_checkbox = Checkbutton(self.team2_frame_roster, text="Player5")
         team2_player2_checkbox = Checkbutton(self.team2_frame_roster, text="Player6")

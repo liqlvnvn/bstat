@@ -107,10 +107,11 @@ class MainWindow():
         r = IntVar()
         self.playing_roster_team1_frame = LabelFrame(self.playing_roster_frame,
                 text="Team1")
-        self.playing_roster_team1_frame.pack() #grid(row=0, column=0)
+        self.playing_roster_team1_frame.grid(row=0, column=0)
+
         self.playing_roster_team2_frame = LabelFrame(self.playing_roster_frame,
                 text="Team2")
-        self.playing_roster_team2_frame.pack() #grid(row=0, column=1)
+        self.playing_roster_team2_frame.grid(row=0, column=1)
         test_team11_radiobutton = Radiobutton(self.playing_roster_team1_frame,
                 text="Player1", variable=r, value = 1)
         test_team12_radiobutton = Radiobutton(self.playing_roster_team1_frame,
@@ -138,7 +139,7 @@ class MainWindow():
         test_event2_button.pack()
 
         substitution_button = Button(game_actions_frame, text="Substitution",
-                command=self.substitution())
+                command=self.substitution)
         substitution_button.grid(row=7, column=0)
 
     def new_game(self):
@@ -166,7 +167,7 @@ class MainWindow():
         for widget in self.playing_roster_team1_frame.winfo_children():
             widget.destroy()
 
-        for widget in self.playing_roster_team1_frame.winfo_children():
+        for widget in self.playing_roster_team2_frame.winfo_children():
             widget.destroy()
 
         for player in self.team1_roster_list:
@@ -178,10 +179,10 @@ class MainWindow():
                 self.team2_playing_list.append(player)
 
         for player in self.team1_playing_list:
-            Radiobutton(self.playing_roster_team1_frame, text=player.name())
+            Radiobutton(self.playing_roster_team1_frame, text=player.name()).pack()
 
         for player in self.team2_playing_list:
-            Radiobutton(self.playing_roster_team2_frame, text=player.name())
+            Radiobutton(self.playing_roster_team2_frame, text=player.name()).pack()
 
 
 main_window = MainWindow(root)

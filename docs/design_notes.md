@@ -8,6 +8,9 @@
 
 ## Stats input
 
+- JSON as type of input
+- Web interface
+
 ### Main entities
 
 - Match
